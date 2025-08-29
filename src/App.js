@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import Card from "./components/Card";
 
 function App() {
+  const cards = [
+    { title: "Card 1", desc: "Learn react 4 fun", color: "blue" },
+    { title: "Card 2", desc: "css by tailwind", color: "green" },
+    { title: "Card 3", desc: "Reusable Component", color: "red" },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen flex items-center justify-center gap-6 bg-gradient-to-r from-purple-500 to-pink">
+      {cards.map((c, i) => (
+        <Card key={i} title={c.title} desc={c.desc} color={c.color} />
+      ))}
     </div>
   );
 }
