@@ -17,6 +17,12 @@ export default function Card({ title, desc, color }) {
     red: "bg-red-800 hover:bg-red-700",
   };
 
+  const getButtonClass = (type) => {
+    const base = colors[color];
+    const active = changedColors[color];
+    return userAction === type ? active : base;
+  };
+
   const handleLike = () => {
     if (userAction === "like") {
       setLikes(likes - 1);
@@ -48,26 +54,28 @@ export default function Card({ title, desc, color }) {
   return (
     <div className="bg-white text-gray-800 rounded-2xl shadow-lg p-6 w-64 text-center">
       <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p className="text-grey-600 mb-4">{desc}</p>
+      <p className="text-gray-600 mb-4">{desc}</p>
       <p className="mb-2">
         Likes: {likes} | Dislikes: {dislikes}
       </p>
-      <button
-        onClick={handleLike}
-        className={`${
-          userAction === "like" ? changedColors[color] : colors[color]
-        } text-white px-4 py-2 rounded-lg`}
-      >
-        Like 👍
-      </button>
-      <button
-        onClick={handleDislike}
-        className={`${
-          userAction === "dislike" ? changedColors[color] : colors[color]
-        } text-white ml-2 px-4 py-2 rounded-lg`}
-      >
-        Dislike 👎
-      </button>
+      <div className="flex justify-center gap-2">
+        <button
+          onClick={handleLike}
+          className={`${getButtonClass(
+            "like"
+          )} text-white px-4 py-2 rounded-lg`}
+        >
+          Like 👍
+        </button>
+        <button
+          onClick={handleDislike}
+          className={`${getButtonClass(
+            "dislike"
+          )} text-white px-4 py-2 rounded-lg`}
+        >
+          Dislike 👎
+        </button>
+      </div>
     </div>
   );
 }
